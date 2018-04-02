@@ -9,7 +9,7 @@ Before starting you need specify your API key :
 (setf cl-owm:*api-key* "YOUR_BIG_SECRET")
 ```
 
-and units you want to use ("standard", "metric", "imperial") (see documentation):
+and units you want to use ("standard", "metric", "imperial") (see [documentation][2]):
 
 ```
 (setf cl-owm:*units* "metric")
