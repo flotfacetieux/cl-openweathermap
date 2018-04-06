@@ -9,7 +9,7 @@ Before starting you need specify your API key :
 (setf cl-owm:*api-key* "YOUR_BIG_SECRET")
 ```
 
-- First : define a location
+### First : define a location
 
 You can modify the default standard units (see [documentation][2]) :
   - "standard" 
@@ -17,7 +17,7 @@ You can modify the default standard units (see [documentation][2]) :
   - "imperial"
 
 
-  - By city name
+#### By city name
 
 ```
 (cl-owm.core:build-uri-by-city "London")
@@ -26,33 +26,34 @@ or
 ; "http://api.openweathermap.org/data/2.5/weather?q=London,uk&units=metric&appid=YOUR_BIG_SECRET"
 ```
 
-  - By city id
+#### By city id
 
 ```
 (cl-owm.core:build-uri-by-id 2643743 :units "standard")
 ;"http://api.openweathermap.org/data/2.5/weather?id=2643743&units=imperial&appid=YOUR_BIG_SECRET"
 ```
 
-  - By coords
+#### By coords
 
 ```
 (cl-owm.core:build-uri-by-coords 51.51 0.13)
 ;"http://api.openweathermap.org/data/2.5/weather?lat=51.51&lon=0.13&appid=YOUR_BIG_SECRET"
 ```
 
-- Next : perform the request
+### Next : perform the request
 
 ```
 (cl-owm.core:request (cl-owm.core:build-uri-by-coords 51.51 0.13))
 ```
 
-- Next : parse the response
+### Next : parse the response
 
 ```
 (cl-owm.core:parse-response (cl-owm.core:request (cl-owm.core:build-uri-by-coords 51.51 0.13)))
 ```
 
-- Finaly : Display some data
+### Finaly : Display some data
+
 ```
 (defparameter *weather-report* (cl-owm.core:parse-response (cl-owm.core:request (cl-owm.core:build-uri-by-coords 51.51 0.13))))
 (cl-owm:wr-temperature *weather-report*)
