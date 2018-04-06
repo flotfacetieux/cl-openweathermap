@@ -6,7 +6,7 @@
   :licence "MIT"
   :description "Get Weather Report from Open Weather Map web site"
   :serial t
-  :components ((:file "package")
-               (:file "openweathermap")
+  :components ((:file "core")
+               (:file "utils")
 	       (:file "test"))
   :depends-on (:alexandria :jonathan :dexador :local-time :lisp-unit))

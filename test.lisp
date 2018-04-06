@@ -1,4 +1,18 @@
-(in-package :cl-openweathermap-tests)
+(defpackage cl-openweathermap.tests
+  (:use #:cl #:lisp-unit)
+  (:nicknames :cl-owm.tests)
+  (:import-from :cl-owm.core
+		:*api-key*
+		:*base-uri*
+		:build-uri-by-city
+		:weather-data)
+  (:import-from :cl-owm.utils
+		:location
+		:update-location
+		:location-weather-report)
+  (:export :do-tests))
+
+(in-package :cl-owm.tests)
 
 ;; Test with openweathermap sample URI
 
@@ -20,32 +34,35 @@
     ("coord" ("lat" . 51.51) ("lon" . 0.13))))
 
 (define-test test-request-by-name
-    (let ((location1 (define-location :city-name *london-city-name*))
-	  (location2 (define-location :city-name *london-city-name* :country-code *london-country-code*)))
-      (update-location location1)
-      (update-location location2)
+  (let ((loc1 (make-instance
+	       'location
+	       :uri (build-uri-by-city *london-city-name*)))
+	(loc2 (make-instance
+	       'location
+	       :uri (build-uri-by-city *london-city-name*
+				       *london-country-code*))))
+      (update-location loc1)
+      (update-location loc2)
       (assert-equalp *london-city-name*
-		    (weather-data location1 '("name")))
+		    (weather-data (location-weather-report loc1)
+				  '("name")))
       (assert-equalp *london-city-name*
-		    (weather-data location2 '("name")))))
+		    (weather-data (location-weather-report loc1)
+				  '("name")))))
 
 (define-test test-temperature-report
-    (let ((location
-	   (make-instance 'location
-			  :weather-report *london-weather-report*)))
-      (assert-true (weather-data location '("temp" "main")))))
+  (assert-true (weather-data *london-weather-report*
+			     '("temp" "main"))))
 
 (define-test test-humidity-report
-    (let ((location
-	   (make-instance 'location
-			  :weather-report *london-weather-report*)))
-      (assert-true (weather-data location '("humidity" "main")))))
+    (assert-true (weather-data *london-weather-report*
+			       '("humidity" "main"))))
 
 (defun do-tests ()
   (setq *print-failures* t)
   (setq *print-errors* t)
   (setf *api-key* "b6907d289e10d714a6e88b30761fae22"
 	*base-uri* "http://samples.openweathermap.org/data/2.5/weather")
-  (run-tests :all :cl-owm-tests)
+  (run-tests :all :cl-owm.tests)
   (setf *api-key* nil
 	*base-uri* "http://api.openweathermap.org/data/2.5/weather"))
