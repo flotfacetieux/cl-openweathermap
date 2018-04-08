@@ -1,7 +1,7 @@
 (defpackage cl-openweathermap.utils
   (:use #:cl)
   (:nicknames :cl-owm.utils)
-  (:import-from :cl-owm.core
+  (:import-from :cl-owm
 		#:request
 		#:parse-response)
   (:export #:location

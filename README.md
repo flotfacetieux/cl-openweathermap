@@ -20,42 +20,42 @@ You can modify the default standard units (see [documentation][2]) :
 #### By city name
 
 ```
-(cl-owm.core:build-uri-by-city "London")
+(cl-owm:build-uri-by-city "London")
 or
-(cl-owm.core:build-uri-by-city "London" "uk" :units "imperial")
+(cl-owm:build-uri-by-city "London" "uk" :units "imperial")
 ; "http://api.openweathermap.org/data/2.5/weather?q=London,uk&units=metric&appid=YOUR_BIG_SECRET"
 ```
 
 #### By city id
 
 ```
-(cl-owm.core:build-uri-by-id 2643743 :units "standard")
+(cl-owm:build-uri-by-id 2643743 :units "standard")
 ;"http://api.openweathermap.org/data/2.5/weather?id=2643743&units=imperial&appid=YOUR_BIG_SECRET"
 ```
 
 #### By coords
 
 ```
-(cl-owm.core:build-uri-by-coords 51.51 0.13)
+(cl-owm:build-uri-by-coords 51.51 0.13)
 ;"http://api.openweathermap.org/data/2.5/weather?lat=51.51&lon=0.13&appid=YOUR_BIG_SECRET"
 ```
 
 ### Next : perform the request
 
 ```
-(cl-owm.core:request (cl-owm.core:build-uri-by-coords 51.51 0.13))
+(cl-owm:request (cl-owm:build-uri-by-coords 51.51 0.13))
 ```
 
 ### Next : parse the response
 
 ```
-(cl-owm.core:parse-response (cl-owm.core:request (cl-owm.core:build-uri-by-coords 51.51 0.13)))
+(cl-owm:parse-response (cl-owm:request (cl-owm:build-uri-by-coords 51.51 0.13)))
 ```
 
 ### Finaly : Display some data
 
 ```
-(defparameter *weather-report* (cl-owm.core:parse-response (cl-owm.core:request (cl-owm.core:build-uri-by-coords 51.51 0.13))))
+(defparameter *weather-report* (cl-owm:parse-response (cl-owm:request (cl-owm:build-uri-by-coords 51.51 0.13))))
 (cl-owm:wr-temperature *weather-report*)
 ; => 15
 (cl-owm:wr-humidity *weather-report*)

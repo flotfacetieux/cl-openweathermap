@@ -1,7 +1,7 @@
 (defpackage cl-openweathermap.tests
   (:use #:cl #:lisp-unit)
   (:nicknames :cl-owm.tests)
-  (:import-from :cl-owm.core
+  (:import-from :cl-owm
 		:*api-key*
 		:*base-uri*
 		:build-uri-by-city

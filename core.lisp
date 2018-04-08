@@ -1,6 +1,6 @@
-(defpackage cl-openweathermap.core
+(defpackage cl-openweathermap
   (:use #:cl)
-  (:nicknames :cl-owm.core)
+  (:nicknames :cl-owm)
   (:import-from :alexandria
 		#:assoc-value)
   (:export #:*api-key*
@@ -18,7 +18,7 @@
 	   #:wr-date-time
 	   #:wr-wind-speed))
 
-(in-package :cl-owm.core)
+(in-package :cl-owm)
 
 (defvar *api-key* nil)
 
